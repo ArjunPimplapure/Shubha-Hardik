@@ -28,9 +28,9 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ onReplayCurtains
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 26 }}
+        initial={{ opacity: 0, y: 34 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, margin: '0px 0px -50px 0px' }}
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center"
       >
@@ -44,9 +44,9 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ onReplayCurtains
         </p>
 
         <motion.h2
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
+          initial={{ opacity: 0, y: 18, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: '0px 0px -40px 0px' }}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mt-7 font-serif-royal text-4xl sm:text-6xl font-semibold tracking-wider text-[#5C1622]"
         >
@@ -56,7 +56,7 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ onReplayCurtains
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, margin: '0px 0px -40px 0px' }}
           transition={{ duration: 0.8, delay: 0.16 }}
           className="my-8"
         >

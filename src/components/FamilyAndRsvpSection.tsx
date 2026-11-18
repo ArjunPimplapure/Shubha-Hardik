@@ -7,14 +7,14 @@ import { RoyalSectionDivider } from './RoyalOrnaments';
 export const FamilyAndRsvpSection: React.FC = () => {
   return (
     <div className="relative">
-      {/* FAMILY COMPLEMENTS SECTION — Open Editorial Typography */}
-      <section className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+      {/* FAMILY COMPLEMENTS SECTION — Symmetrical 2-col layout across phone & desktop */}
+      <section className="relative py-14 sm:py-24 px-4 sm:px-6 overflow-hidden">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 34 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: '0px 0px -60px 0px' }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-xs sm:text-sm uppercase tracking-[0.26em] text-[#8E6B23] font-semibold">
               Warmest Wishes
@@ -25,21 +25,21 @@ export const FamilyAndRsvpSection: React.FC = () => {
             >
               WITH COMPLIMENTS FROM
             </h2>
-            <RoyalSectionDivider className="mt-5 mb-10" />
+            <RoyalSectionDivider className="mt-5 mb-9 sm:mb-10" />
           </motion.div>
 
-          {/* Symmetrical staggered scroll reveal for all 5 family names */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-10 max-w-xl mx-auto">
+          {/* Symmetrical 2-column grid on mobile & desktop so phone matches desktop layout */}
+          <div className="grid grid-cols-2 gap-y-5 gap-x-4 sm:gap-y-6 sm:gap-x-10 max-w-xl mx-auto">
             {WEDDING_DATA.compliments.slice(0, 4).map((name, idx) => (
               <motion.div
                 key={name}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.7, delay: idx * 0.1 }}
+                viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                transition={{ duration: 0.7, delay: idx * 0.08 }}
                 className="py-2 border-b border-[#D4AF37]/25"
               >
-                <p className="font-serif-royal text-2xl sm:text-3xl font-medium text-[#3B191E] tracking-wide">
+                <p className="font-serif-royal text-base sm:text-3xl font-medium text-[#3B191E] tracking-wide">
                   {name}
                 </p>
               </motion.div>
@@ -47,13 +47,13 @@ export const FamilyAndRsvpSection: React.FC = () => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-7 max-w-[260px] mx-auto py-2 border-b border-[#D4AF37]/25"
+            viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="mt-6 max-w-[200px] sm:max-w-[260px] mx-auto py-2 border-b border-[#D4AF37]/25"
           >
-            <p className="font-serif-royal text-2xl sm:text-3xl font-medium text-[#3B191E] tracking-wide">
+            <p className="font-serif-royal text-base sm:text-3xl font-medium text-[#3B191E] tracking-wide">
               {WEDDING_DATA.compliments[4]}
             </p>
           </motion.div>
@@ -61,12 +61,12 @@ export const FamilyAndRsvpSection: React.FC = () => {
       </section>
 
       {/* RSVP SECTION */}
-      <section id="rsvp" className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+      <section id="rsvp" className="relative py-14 sm:py-24 px-4 sm:px-6 overflow-hidden">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 34 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, margin: '0px 0px -60px 0px' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-xs sm:text-sm uppercase tracking-[0.26em] text-[#8E6B23] font-semibold">
@@ -81,18 +81,18 @@ export const FamilyAndRsvpSection: React.FC = () => {
             <p className="mt-3 font-serif-royal italic text-lg sm:text-xl text-[#5A3934] max-w-xl mx-auto">
               We would be delighted to have you celebrate these special moments with us.
             </p>
-            <RoyalSectionDivider className="mt-5 mb-12" />
+            <RoyalSectionDivider className="mt-5 mb-10 sm:mb-12" />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {WEDDING_DATA.rsvpContacts.map((contact, idx) => (
               <motion.div
                 key={contact.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.75, delay: idx * 0.14 }}
-                className="parchment-texture rounded-2xl border border-[#C59B38]/55 shadow-[0_14px_38px_rgba(92,22,34,0.08)] px-6 py-8 sm:px-8 sm:py-9 flex flex-col items-center"
+                initial={{ opacity: 0, y: 32, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                transition={{ duration: 0.75, delay: idx * 0.12 }}
+                className="bg-[#FFFDF8]/80 backdrop-blur-sm rounded-2xl border border-[#C59B38]/55 shadow-[0_14px_38px_rgba(92,22,34,0.08)] px-6 py-7 sm:px-8 sm:py-9 flex flex-col items-center"
               >
                 <h3 className="font-serif-royal text-2xl sm:text-3xl font-semibold text-[#5C1622]">
                   {contact.name}
@@ -101,7 +101,7 @@ export const FamilyAndRsvpSection: React.FC = () => {
                   {contact.displayPhone}
                 </p>
 
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-3 w-full">
+                <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3 w-full">
                   <a
                     href={contact.telHref}
                     className="flex-1 min-w-[132px] inline-flex items-center justify-center gap-2 min-h-[46px] px-5 py-2.5 rounded-xl bg-[#5C1622] text-[#FAF6EE] text-xs sm:text-sm font-medium uppercase tracking-[0.14em] shadow-sm transition-all duration-200 hover:bg-[#430D16] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"

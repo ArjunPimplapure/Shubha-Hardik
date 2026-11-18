@@ -407,9 +407,9 @@ export const HeartScratchCountdown: React.FC = () => {
     <section id="countdown" className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 34 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, margin: '0px 0px -50px 0px' }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="text-xs sm:text-sm uppercase tracking-[0.24em] text-[#8E6B23] font-medium">
@@ -429,10 +429,10 @@ export const HeartScratchCountdown: React.FC = () => {
 
         {/* Heart-Shaped Interactive Scratch Card Stage */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 36, scale: 0.94 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           className="relative flex flex-col items-center justify-center"
         >
           {/* Ambient golden-blush halo */}

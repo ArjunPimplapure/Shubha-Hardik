@@ -91,11 +91,11 @@ export default function App() {
     <div className="relative min-h-screen ivory-canvas-bg text-[#2B1B18] overflow-x-hidden">
       {/*
         Replaceable Background Wedding Audio Player.
-        Update WEDDING_MUSIC_SRC in src/config/weddingConfig.ts or replace public/audio/wedding-music.wav
+        Update WEDDING_MUSIC_SRC in src/config/weddingConfig.ts or replace public/wedding-music.wav
       */}
       <audio ref={audioRef} src={WEDDING_MUSIC_SRC} loop preload="auto" />
 
-      {/* Main Wedding Invitation rendered underneath so parting curtains reveal it live */}
+      {/* Main Wedding Invitation */}
       <div className="relative min-h-screen">
         {/* Thin golden scroll-progress thread at top of viewport */}
         {curtainsOpened && (
@@ -120,14 +120,21 @@ export default function App() {
         )}
 
         <main className="relative z-10">
+          {/* Hero sits behind curtains so parting curtains reveal it live */}
           <HeroInvitation />
-          <HeartScratchCountdown />
-          <EventsItinerary />
-          <VenueSection />
-          <FamilyAndRsvpSection />
+
+          {/* Lower sections mount once curtains open so scroll-triggered animations play smoothly on scroll */}
+          {curtainsOpened && (
+            <>
+              <HeartScratchCountdown />
+              <EventsItinerary />
+              <VenueSection />
+              <FamilyAndRsvpSection />
+            </>
+          )}
         </main>
 
-        <ClosingSection onReplayCurtains={handleReplayCurtains} />
+        {curtainsOpened && <ClosingSection onReplayCurtains={handleReplayCurtains} />}
       </div>
 
       {/* Full-Size Royal Velvet Curtains Opening Overlay */}

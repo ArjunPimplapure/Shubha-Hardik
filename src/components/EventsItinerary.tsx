@@ -71,7 +71,7 @@ const EventArtwork: React.FC<{
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className="relative w-full aspect-[4/3] overflow-hidden rounded-t-xl">
+    <div className="relative w-full aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-t-xl">
       {!failed ? (
         <img
           src={src}
@@ -90,7 +90,7 @@ const EventArtwork: React.FC<{
       )}
       <div
         aria-hidden="true"
-        className={`absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t ${
+        className={`absolute inset-x-0 bottom-0 h-12 sm:h-14 bg-gradient-to-t ${
           isDark ? 'from-[#3C0B14] via-[#3C0B14]/45' : 'from-[#FFFDF8]/90 via-[#FFFDF8]/30'
         } to-transparent`}
       />
@@ -100,14 +100,14 @@ const EventArtwork: React.FC<{
 
 export const EventsItinerary: React.FC = () => {
   return (
-    <section id="celebrations" className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+    <section id="celebrations" className="relative py-14 sm:py-24 px-4 sm:px-6 overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 36 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, margin: '0px 0px -60px 0px' }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <p className="text-xs sm:text-sm uppercase tracking-[0.26em] text-[#8E6B23] font-medium">
             Wedding Celebrations
@@ -118,20 +118,20 @@ export const EventsItinerary: React.FC = () => {
           >
             The Sacred Itinerary
           </h2>
-          <RoyalSectionDivider className="mt-5" />
+          <RoyalSectionDivider className="mt-4 sm:mt-5" />
         </motion.div>
 
-        <div className="space-y-16 sm:space-y-20">
+        <div className="space-y-14 sm:space-y-20">
           {WEDDING_DATA.days.map((day, dayIndex) => (
             <React.Fragment key={day.id}>
               {/* Individual Date Block */}
               <div className="relative">
                 <motion.div
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.7 }}
-                  className="text-center mb-8 sm:mb-10"
+                  viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-center mb-7 sm:mb-10"
                 >
                   <p className="text-xs uppercase tracking-[0.28em] text-[#8E6B23] font-semibold">
                     Day {dayIndex + 1}
@@ -145,7 +145,7 @@ export const EventsItinerary: React.FC = () => {
                 </motion.div>
 
                 {/* Two Event Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-9 items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-9 items-stretch">
                   {day.events.map((event, evIndex) => {
                     const styles = THEME_STYLES[event.theme];
                     const isDark = event.theme === 'sangeet' || event.theme === 'reception';
@@ -153,12 +153,12 @@ export const EventsItinerary: React.FC = () => {
                     return (
                       <motion.article
                         key={event.id}
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.15 }}
+                        initial={{ opacity: 0, y: 44, scale: 0.96 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: true, margin: '0px 0px -50px 0px' }}
                         transition={{
                           duration: 0.8,
-                          delay: evIndex * 0.12,
+                          delay: evIndex * 0.1,
                           ease: [0.16, 1, 0.3, 1],
                         }}
                         className={`group relative rounded-2xl border ${styles.borderClass} ${styles.cardClass} shadow-[0_18px_45px_rgba(43,27,24,0.12)] transition-transform duration-300 hover:-translate-y-1 flex flex-col overflow-hidden`}
@@ -173,21 +173,21 @@ export const EventsItinerary: React.FC = () => {
                         {/* Ornamental corners on bottom of card */}
                         <CornerFiligree
                           flipY
-                          className={`absolute bottom-2 left-2 w-12 h-12 pointer-events-none ${
+                          className={`absolute bottom-2 left-2 w-10 h-10 sm:w-12 sm:h-12 pointer-events-none ${
                             isDark ? 'text-[#E7C76B]/35' : 'text-[#9E7B2F]/35'
                           }`}
                         />
                         <CornerFiligree
                           flipX
                           flipY
-                          className={`absolute bottom-2 right-2 w-12 h-12 pointer-events-none ${
+                          className={`absolute bottom-2 right-2 w-10 h-10 sm:w-12 sm:h-12 pointer-events-none ${
                             isDark ? 'text-[#E7C76B]/35' : 'text-[#9E7B2F]/35'
                           }`}
                         />
 
-                        <div className="relative z-10 flex-1 flex flex-col items-center justify-between text-center px-6 py-7 sm:px-8 sm:py-8">
+                        <div className="relative z-10 flex-1 flex flex-col items-center justify-between text-center px-5 py-5 sm:px-8 sm:py-8">
                           <div>
-                            <div className="flex items-center justify-center gap-2 mb-2">
+                            <div className="flex items-center justify-center gap-2 mb-1.5 sm:mb-2">
                               {styles.icon}
                             </div>
 
@@ -198,15 +198,15 @@ export const EventsItinerary: React.FC = () => {
                             </h4>
 
                             <p
-                              className={`mt-1.5 font-serif-royal italic text-lg sm:text-xl ${styles.taglineClass}`}
+                              className={`mt-1 font-serif-royal italic text-base sm:text-xl ${styles.taglineClass}`}
                             >
                               {event.tagline}
                             </p>
                           </div>
 
-                          <div className="w-full mt-6">
+                          <div className="w-full mt-4 sm:mt-6">
                             <div
-                              className={`h-[1px] w-24 mx-auto bg-gradient-to-r from-transparent ${styles.dividerClass} to-transparent mb-4`}
+                              className={`h-[1px] w-20 sm:w-24 mx-auto bg-gradient-to-r from-transparent ${styles.dividerClass} to-transparent mb-3 sm:mb-4`}
                             />
                             <div
                               className={`inline-flex items-center justify-center gap-2 text-sm sm:text-base font-medium tracking-[0.18em] ${styles.timeClass}`}
@@ -225,9 +225,9 @@ export const EventsItinerary: React.FC = () => {
               {/* Official Wedding Logo Crest nestled elegantly between Day 1 & Day 2 */}
               {dayIndex === 0 && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.92 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
                   transition={{ duration: 0.7 }}
                   className="flex items-center justify-center gap-4 sm:gap-6 py-2"
                 >
