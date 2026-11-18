@@ -1,0 +1,6 @@
+{
+  "name": "Shubha & Hardik — Royal Wedding Invitation",
+  "description": "Interactive digital wedding invitation for Shubha Shah and Hardik Goda, hosted by the Shah Family on 25–26 December 2026 at The Exotica Hotel, Indore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

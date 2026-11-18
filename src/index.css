@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ivory-canvas: #FAF6EE;
+    --ivory-parchment: #FFFDF8;
+    --ivory-warm: #F3EAD8;
+    --champagne-gold: #D4AF37;
+    --antique-gold: #8E6B23;
+    --gold-highlight: #F1D98A;
+    --blush-pink: #F4DCE0;
+    --rose-gold: #C98B83;
+    --deep-burgundy: #5C1622;
+    --burgundy-dark: #3B0B14;
+    --ink-espresso: #2B1B18;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--ivory-canvas);
+    color: var(--ink-espresso);
+    overflow-x: hidden;
+  }
+}
+
+.font-serif-royal {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-devanagari {
+  font-family: 'Noto Serif Devanagari', Georgia, serif;
+}
+
+.font-sans-clean {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Subtle luxury paper grain texture */
+.parchment-texture {
+  background-color: #FFFDF8;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(201, 139, 131, 0.08) 0%, transparent 55%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(142, 107, 35, 0.015) 0px,
+      rgba(142, 107, 35, 0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+.ivory-canvas-bg {
+  background-color: #FAF6EE;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(241, 217, 138, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(244, 220, 224, 0.25) 0%, transparent 60%);
+}
+
+/* Gold foil shimmer text */
+.gold-foil-text {
+  background: linear-gradient(
+    135deg,
+    #7D5A18 0%,
+    #C9A23F 32%,
+    #F3DE9A 50%,
+    #B68D2C 68%,
+    #725114 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Ultra-realistic 3D vertical-opening pearl-ivory paper cylinder shading */
+.scroll-cylinder-top {
+  background: linear-gradient(
+    180deg,
+    #B6AA94 0%,
+    #DDD4C3 9%,
+    #F5F0E6 22%,
+    #FFFFFF 38%,
+    #FAF7F0 54%,
+    #E6DDD0 74%,
+    #C4B59C 90%,
+    #9C8B71 100%
+  );
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.75),
+    inset 0 -5px 10px rgba(64, 45, 18, 0.28),
+    0 12px 26px rgba(43, 27, 24, 0.25);
+}
+
+.scroll-cylinder-bottom {
+  background: linear-gradient(
+    180deg,
+    #9C8B71 0%,
+    #C4B59C 12%,
+    #E6DDD0 28%,
+    #FAF7F0 46%,
+    #FFFFFF 64%,
+    #F5F0E6 80%,
+    #DDD4C3 92%,
+    #B2A48D 100%
+  );
+  box-shadow:
+    inset 0 5px 10px rgba(64, 45, 18, 0.26),
+    inset 0 -2px 3px rgba(255, 255, 255, 0.65),
+    0 18px 34px rgba(43, 27, 24, 0.32);
+}
+
+.scroll-paper-vertical {
+  background-color: #FCF9F2;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(95, 72, 38, 0.22) 0%,
+      rgba(142, 112, 68, 0.08) 5%,
+      rgba(255, 253, 248, 0) 14%,
+      rgba(255, 253, 248, 0) 86%,
+      rgba(142, 112, 68, 0.09) 95%,
+      rgba(95, 72, 38, 0.24) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(166, 145, 112, 0.14) 0%,
+      rgba(255, 253, 248, 0) 7%,
+      rgba(255, 253, 248, 0) 93%,
+      rgba(166, 145, 112, 0.14) 100%
+    ),
+    radial-gradient(circle at 50% 48%, rgba(255, 248, 220, 0.65) 0%, transparent 65%);
+}
+
+@keyframes tasselSway {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+.animate-tassel-sway {
+  transform-origin: top center;
+  animation: tasselSway 4.2s ease-in-out infinite;
+}
+
+/* Gentle antique gold wax seal breathing animation */
+@keyframes sealPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 8px 18px rgba(68, 46, 12, 0.42)) drop-shadow(0 0 0 rgba(212, 175, 55, 0.45));
+  }
+  50% {
+    transform: scale(1.045);
+    filter: drop-shadow(0 12px 24px rgba(68, 46, 12, 0.45)) drop-shadow(0 0 16px rgba(235, 198, 95, 0.65));
+  }
+}
+
+.animate-seal-pulse {
+  animation: sealPulse 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Slow ambient mandala rotation */
+@keyframes slowSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slow-spin {
+  animation: slowSpin 90s linear infinite;
+}
+
+/* Equalizer bars for music control */
+@keyframes musicBar {
+  0%, 100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.music-bar-1 {
+  animation: musicBar 0.9s ease-in-out infinite;
+}
+.music-bar-2 {
+  animation: musicBar 0.7s ease-in-out 0.2s infinite;
+}
+.music-bar-3 {
+  animation: musicBar 1.05s ease-in-out 0.4s infinite;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-seal-pulse,
+  .animate-slow-spin,
+  .music-bar-1,
+  .music-bar-2,
+  .music-bar-3 {
+    animation: none !important;
+  }
+}
