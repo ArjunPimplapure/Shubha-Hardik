@@ -38,11 +38,13 @@ export default function App() {
     const handleEnded = () => setIsPlaying(false);
 
     audio.addEventListener('play', handlePlay);
+    audio.addEventListener('playing', handlePlay);
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('playing', handlePlay);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
     };
@@ -51,7 +53,10 @@ export default function App() {
   const attemptStartMusic = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.volume = 0.45;
+    audio.volume = 0.55;
+    if (audio.readyState === 0) {
+      audio.load();
+    }
     const playPromise = audio.play();
     if (playPromise && typeof playPromise.catch === 'function') {
       playPromise.catch(() => {
@@ -66,7 +71,10 @@ export default function App() {
     if (!audio) return;
 
     if (audio.paused) {
-      audio.volume = 0.45;
+      audio.volume = 0.55;
+      if (audio.readyState === 0) {
+        audio.load();
+      }
       audio.play().catch(() => setIsPlaying(false));
     } else {
       audio.pause();

@@ -26,8 +26,8 @@ export const WEDDING_LOGO_SRC = '/src/assets/images/wedding_monogram_17950427860
 export const ROYAL_SCROLL_SRC =
   '/assets/aistudio/images__1__6174b8fd.jfif';
 
-// Replace with your custom wedding song path, e.g. '/audio/shehnai-wedding-theme.mp3'
-export const WEDDING_MUSIC_SRC = '/audio/wedding-music.wav';
+// Replace with your custom wedding song path, e.g. '/wedding-music.wav' or '/audio/shehnai-wedding-theme.mp3'
+export const WEDDING_MUSIC_SRC = '/wedding-music.wav';
 
 export const DECORATIVE_IMAGES = {
   haldi: '/src/assets/images/haldi_marigold_motif_1795042786712.jpg',
