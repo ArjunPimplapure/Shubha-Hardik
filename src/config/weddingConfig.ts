@@ -50,8 +50,10 @@ export const WEDDING_DATA = {
     name: 'HARDIK GODA',
     parents: 'S/o Shri Kishore Goda & Smt. Prerna Ben Goda',
   },
-  // Midnight of 25 December 2026 in Asia/Kolkata (+05:30)
-  countdownTargetIso: '2026-12-25T00:00:00+05:30',
+  // Midnight of the Wedding Date (26 December 2026) in Asia/Kolkata (+05:30)
+  countdownTargetIso: '2026-12-26T00:00:00+05:30',
+  weddingDateDisplay: '26 December 2026',
+  weddingDateShort: '26 Dec 2026',
   days: [
     {
       id: 'day-1',

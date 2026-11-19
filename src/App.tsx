@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useSpring } from 'motion/react';
+import { motion, MotionConfig, useScroll, useSpring } from 'motion/react';
 import { WEDDING_MUSIC_SRC } from './config/weddingConfig';
 import { AmbientParticles } from './components/AmbientParticles';
 import { OpeningCurtains } from './components/OpeningCurtains';
@@ -88,6 +88,7 @@ export default function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="relative min-h-screen ivory-canvas-bg text-[#2B1B18] overflow-x-hidden">
       {/*
         Replaceable Background Wedding Audio Player.
@@ -102,7 +103,7 @@ export default function App() {
           <motion.div
             aria-hidden="true"
             style={{ scaleX }}
-            className="fixed top-0 left-0 right-0 h-[2.5px] origin-left z-50 bg-gradient-to-r from-[#8E6B23] via-[#F1D98A] to-[#C59B38] pointer-events-none"
+            className="fixed top-0 left-0 right-0 h-[3px] origin-left z-50 bg-gradient-to-r from-[#8E6B23] via-[#F5E09D] to-[#C59B38] shadow-[0_0_10px_rgba(212,175,55,0.65)] pointer-events-none"
           />
         )}
 
@@ -121,7 +122,7 @@ export default function App() {
 
         <main className="relative z-10">
           {/* Hero sits behind curtains so parting curtains reveal it live */}
-          <HeroInvitation />
+          <HeroInvitation curtainsOpened={curtainsOpened} />
 
           {/* Lower sections mount once curtains open so scroll-triggered animations play smoothly on scroll */}
           {curtainsOpened && (
@@ -146,5 +147,6 @@ export default function App() {
         />
       )}
     </div>
+    </MotionConfig>
   );
 }

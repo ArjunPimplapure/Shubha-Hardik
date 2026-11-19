@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Clock, Music, Sparkles, Sun, Flame } from 'lucide-react';
 import { WEDDING_DATA } from '../config/weddingConfig';
 import { CornerFiligree, RoyalSectionDivider } from './RoyalOrnaments';
@@ -69,17 +69,24 @@ const EventArtwork: React.FC<{
   isDark: boolean;
 }> = ({ src, alt, fallbackGradient, isDark }) => {
   const [failed, setFailed] = useState(false);
+  const frameRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: frameRef,
+    offset: ['start end', 'end start'],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], [-14, 14]);
 
   return (
-    <div className="relative w-full aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-t-xl">
+    <div ref={frameRef} className="relative w-full aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-t-xl">
       {!failed ? (
-        <img
+        <motion.img
+          style={{ y: imgY, scale: 1.08 }}
           src={src}
           alt={alt}
           loading="lazy"
           referrerPolicy="no-referrer"
           onError={() => setFailed(true)}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.11]"
         />
       ) : (
         <div
@@ -103,10 +110,10 @@ export const EventsItinerary: React.FC = () => {
     <section id="celebrations" className="relative py-14 sm:py-24 px-4 sm:px-6 overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 36 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 36, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '0px 0px -60px 0px' }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-10 sm:mb-16"
         >
           <p className="text-xs sm:text-sm uppercase tracking-[0.26em] text-[#8E6B23] font-medium">
@@ -127,10 +134,10 @@ export const EventsItinerary: React.FC = () => {
               {/* Individual Date Block */}
               <div className="relative">
                 <motion.div
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 32, filter: 'blur(4px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
                   className="text-center mb-7 sm:mb-10"
                 >
                   <p className="text-xs uppercase tracking-[0.28em] text-[#8E6B23] font-semibold">
@@ -144,8 +151,8 @@ export const EventsItinerary: React.FC = () => {
                   </p>
                 </motion.div>
 
-                {/* Two Event Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-9 items-stretch">
+                {/* Two Event Cards Grid with 3D Perspective Unfold & Golden Sheen Sweep */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-9 items-stretch [perspective:1100px]">
                   {day.events.map((event, evIndex) => {
                     const styles = THEME_STYLES[event.theme];
                     const isDark = event.theme === 'sangeet' || event.theme === 'reception';
@@ -153,16 +160,34 @@ export const EventsItinerary: React.FC = () => {
                     return (
                       <motion.article
                         key={event.id}
-                        initial={{ opacity: 0, y: 44, scale: 0.96 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        initial={{ opacity: 0, y: 48, rotateX: 9, scale: 0.94 }}
+                        whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
                         viewport={{ once: true, margin: '0px 0px -50px 0px' }}
                         transition={{
-                          duration: 0.8,
-                          delay: evIndex * 0.1,
+                          duration: 0.85,
+                          delay: evIndex * 0.12,
                           ease: [0.16, 1, 0.3, 1],
                         }}
                         className={`group relative rounded-2xl border ${styles.borderClass} ${styles.cardClass} shadow-[0_18px_45px_rgba(43,27,24,0.12)] transition-transform duration-300 hover:-translate-y-1 flex flex-col overflow-hidden`}
                       >
+                        {/* Diagonal metallic golden sheen gliding across card upon scroll reveal */}
+                        <motion.div
+                          aria-hidden="true"
+                          initial={{ x: '-130%', opacity: 0 }}
+                          whileInView={{ x: '160%', opacity: [0, 0.45, 0] }}
+                          viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                          transition={{
+                            duration: 1.25,
+                            delay: 0.28 + evIndex * 0.14,
+                            ease: 'easeInOut',
+                          }}
+                          className="absolute inset-y-0 -left-1/3 w-2/3 pointer-events-none z-20 -skew-x-12"
+                          style={{
+                            background:
+                              'linear-gradient(90deg, transparent 0%, rgba(255,248,214,0.38) 50%, transparent 100%)',
+                          }}
+                        />
+
                         <EventArtwork
                           src={event.image}
                           alt={event.imageAlt}
@@ -224,21 +249,34 @@ export const EventsItinerary: React.FC = () => {
 
               {/* Official Wedding Logo Crest nestled elegantly between Day 1 & Day 2 */}
               {dayIndex === 0 && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
-                  transition={{ duration: 0.7 }}
-                  className="flex items-center justify-center gap-4 sm:gap-6 py-2"
-                >
-                  <div className="h-[1px] flex-1 max-w-[140px] bg-gradient-to-r from-transparent to-[#C59B38]/75" />
-                  <WeddingLogo
-                    sizeClass="w-20 h-20 sm:w-24 sm:h-24"
-                    framed
-                    alt="Shubha & Hardik Monogram"
+                <div className="flex items-center justify-center gap-4 sm:gap-6 py-2">
+                  <motion.div
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    whileInView={{ scaleX: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-[1px] flex-1 max-w-[140px] origin-right bg-gradient-to-r from-transparent to-[#C59B38]/75"
                   />
-                  <div className="h-[1px] flex-1 max-w-[140px] bg-gradient-to-l from-transparent to-[#C59B38]/75" />
-                </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.78, rotate: -10 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                    viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <WeddingLogo
+                      sizeClass="w-20 h-20 sm:w-24 sm:h-24"
+                      framed
+                      alt="Shubha & Hardik Monogram"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    whileInView={{ scaleX: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-[1px] flex-1 max-w-[140px] origin-left bg-gradient-to-l from-transparent to-[#C59B38]/75"
+                  />
+                </div>
               )}
             </React.Fragment>
           ))}

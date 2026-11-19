@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { RotateCcw, Sparkles } from 'lucide-react';
 import { WEDDING_DATA } from '../config/weddingConfig';
 import { RoyalSectionDivider } from './RoyalOrnaments';
@@ -67,9 +67,17 @@ export const HeartScratchCountdown: React.FC = () => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [scratchProgress, setScratchProgress] = useState(0);
 
+  const sectionRef = useRef<HTMLElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scratchCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const sparkleCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const heartFloatY = useTransform(scrollYProgress, [0, 0.5, 1], [24, 0, -20]);
+  const haloScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.82, 1.08, 0.94]);
 
   const isDrawingRef = useRef(false);
   const lastPointRef = useRef<{ x: number; y: number } | null>(null);
@@ -404,16 +412,20 @@ export const HeartScratchCountdown: React.FC = () => {
   }, [evaluateScratchedRatio, scratchSegment]);
 
   return (
-    <section id="countdown" className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="countdown"
+      className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden"
+    >
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 34 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 34, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="text-xs sm:text-sm uppercase tracking-[0.24em] text-[#8E6B23] font-medium">
-            25 December 2026
+            {WEDDING_DATA.weddingDateDisplay}
           </p>
           <h2
             className="mt-2 font-serif-royal text-3xl sm:text-5xl font-semibold text-[#5C1622]"
@@ -422,27 +434,29 @@ export const HeartScratchCountdown: React.FC = () => {
             A Little Surprise for You!
           </h2>
           <p className="mt-2.5 font-serif-royal italic text-lg sm:text-xl text-[#5A3934]">
-            Scratch to reveal the countdown to our special day
+            Scratch to reveal the countdown to our wedding day
           </p>
           <RoyalSectionDivider className="mt-5 mb-9 sm:mb-12" />
         </motion.div>
 
-        {/* Heart-Shaped Interactive Scratch Card Stage */}
+        {/* Heart-Shaped Interactive Scratch Card Stage with scroll-linked float */}
         <motion.div
-          initial={{ opacity: 0, y: 36, scale: 0.94 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          style={{ y: heartFloatY }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative flex flex-col items-center justify-center"
         >
-          {/* Ambient golden-blush halo */}
-          <div
+          {/* Scroll-reactive Ambient golden-blush halo */}
+          <motion.div
             aria-hidden="true"
-            className="absolute w-[310px] h-[290px] sm:w-[440px] sm:h-[400px] rounded-full pointer-events-none blur-2xl opacity-65"
             style={{
+              scale: haloScale,
               background:
-                'radial-gradient(circle, rgba(244,220,224,0.85) 0%, rgba(212,175,55,0.28) 55%, transparent 75%)',
+                'radial-gradient(circle, rgba(244,220,224,0.88) 0%, rgba(212,175,55,0.3) 55%, transparent 75%)',
             }}
+            className="absolute w-[310px] h-[290px] sm:w-[440px] sm:h-[400px] rounded-full pointer-events-none blur-2xl opacity-70"
           />
 
           {/* Heart Container */}
@@ -512,7 +526,7 @@ export const HeartScratchCountdown: React.FC = () => {
               )}
 
               <p className="mt-2 font-serif-royal italic text-sm sm:text-base text-[#5C1622]">
-                Shubha &amp; Hardik · 25 Dec 2026
+                Shubha &amp; Hardik · {WEDDING_DATA.weddingDateShort}
               </p>
             </div>
 

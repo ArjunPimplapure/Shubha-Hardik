@@ -5,15 +5,22 @@ import { WEDDING_DATA } from '../config/weddingConfig';
 import { IntertwinedHeartDivider, MandalaWatermark } from './RoyalOrnaments';
 import { WeddingLogo } from './WeddingLogo';
 
-export const HeroInvitation: React.FC = () => {
+interface HeroInvitationProps {
+  curtainsOpened: boolean;
+}
+
+export const HeroInvitation: React.FC<HeroInvitationProps> = ({ curtainsOpened }) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
-  const mandalaY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -24]);
+  const mandalaY = useTransform(scrollYProgress, [0, 1], [0, 96]);
+  const mandalaScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const mandalaOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 0.55, 0.25]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -34]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.72, 1], [1, 0.92, 0.25]);
 
   const scrollToNext = () => {
     const next = document.getElementById('countdown');
@@ -28,9 +35,9 @@ export const HeroInvitation: React.FC = () => {
       id="invitation"
       className="relative min-h-[86dvh] sm:min-h-[92dvh] flex flex-col items-center justify-center pt-12 pb-10 sm:pt-20 sm:pb-16 px-4 sm:px-6 overflow-hidden"
     >
-      {/* Parallax Rotating Royal Mandala Backdrop */}
+      {/* Scroll-Linked Parallax Rotating Royal Mandala Backdrop */}
       <motion.div
-        style={{ y: mandalaY }}
+        style={{ y: mandalaY, scale: mandalaScale, opacity: mandalaOpacity }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
         <MandalaWatermark className="w-[420px] h-[420px] sm:w-[760px] sm:h-[760px] text-[#C59B38]/24 animate-slow-spin" />
@@ -46,13 +53,16 @@ export const HeroInvitation: React.FC = () => {
         }}
       />
 
-      {/* Open Editorial Sanctuary */}
+      {/* Open Editorial Sanctuary with Scroll-Linked Depth & Staggered Reveal */}
       <motion.div
-        style={{ y: contentY }}
+        style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 max-w-3xl w-full mx-auto text-center flex flex-col items-center"
       >
         {/* Top Ornamental Crown Line */}
-        <div
+        <motion.div
+          initial={{ scaleX: 0.4, opacity: 0.5 }}
+          animate={curtainsOpened ? { scaleX: 1, opacity: 1 } : { scaleX: 0.4, opacity: 0.5 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="w-36 sm:w-56 h-[1px] bg-gradient-to-r from-transparent via-[#C59B38] to-transparent mb-4 sm:mb-5"
           aria-hidden="true"
         />
@@ -63,9 +73,13 @@ export const HeroInvitation: React.FC = () => {
         </p>
 
         {/* Official Wedding Monogram */}
-        <div className="my-4 sm:my-7 flex justify-center">
+        <motion.div
+          animate={curtainsOpened ? { scale: [0.96, 1.02, 1] } : undefined}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="my-4 sm:my-7 flex justify-center"
+        >
           <WeddingLogo sizeClass="w-24 h-24 sm:w-44 sm:h-44" />
-        </div>
+        </motion.div>
 
         {/* Blessings Lead Copy */}
         <div className="max-w-lg mx-auto space-y-1.5 sm:space-y-2">
@@ -78,7 +92,12 @@ export const HeroInvitation: React.FC = () => {
         </div>
 
         {/* BRIDE'S DETAILS — Prominent Editorial Typography */}
-        <div className="mt-6 sm:mt-10 px-2">
+        <motion.div
+          initial={{ opacity: 0.85, y: 12 }}
+          animate={curtainsOpened ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 sm:mt-10 px-2"
+        >
           <h1
             className="font-serif-royal text-4xl sm:text-7xl font-semibold tracking-wide text-[#5C1622] leading-[1.06]"
             style={{ textWrap: 'balance' }}
@@ -91,7 +110,7 @@ export const HeroInvitation: React.FC = () => {
               {WEDDING_DATA.bride.grandparents}
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Intertwined Heart & Floral Separator */}
         <div className="my-5 sm:my-9 w-full">
@@ -99,7 +118,12 @@ export const HeroInvitation: React.FC = () => {
         </div>
 
         {/* GROOM'S DETAILS */}
-        <div className="px-2">
+        <motion.div
+          initial={{ opacity: 0.85, y: 12 }}
+          animate={curtainsOpened ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="px-2"
+        >
           <h2
             className="font-serif-royal text-3xl sm:text-6xl font-semibold tracking-wide text-[#5C1622] leading-[1.1]"
             style={{ textWrap: 'balance' }}
@@ -109,7 +133,7 @@ export const HeroInvitation: React.FC = () => {
           <p className="mt-2 sm:mt-2.5 text-xs sm:text-base text-[#3D2522] font-medium">
             {WEDDING_DATA.groom.parents}
           </p>
-        </div>
+        </motion.div>
 
         {/* Scroll Down Cue visible immediately on mobile & desktop */}
         <button
