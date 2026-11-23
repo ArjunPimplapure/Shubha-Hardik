@@ -130,9 +130,12 @@ export const HeroInvitation: React.FC<HeroInvitationProps> = ({ curtainsOpened }
           >
             {WEDDING_DATA.groom.name}
           </h2>
-          <p className="mt-2 sm:mt-2.5 text-xs sm:text-base text-[#3D2522] font-medium">
-            {WEDDING_DATA.groom.parents}
-          </p>
+          <div className="mt-2 sm:mt-2.5 space-y-0.5 sm:space-y-1 text-xs sm:text-base text-[#3D2522]">
+            <p className="font-medium text-[#4B2327]">{WEDDING_DATA.groom.parents}</p>
+            <p className="font-serif-royal italic text-sm sm:text-xl text-[#6E4943]">
+              {WEDDING_DATA.groom.grandparents}
+            </p>
+          </div>
         </motion.div>
 
         {/* Scroll Down Cue visible immediately on mobile & desktop */}

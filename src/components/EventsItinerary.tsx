@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Clock, Music, Sparkles, Sun, Flame } from 'lucide-react';
+import { Clock, Crown, Music, Sparkles, Sun, Flame } from 'lucide-react';
 import { WEDDING_DATA } from '../config/weddingConfig';
 import { CornerFiligree, RoyalSectionDivider } from './RoyalOrnaments';
 import { WeddingLogo } from './WeddingLogo';
 
-type EventTheme = 'haldi' | 'sangeet' | 'vivah' | 'reception';
+type EventTheme = 'haldi' | 'sangeet' | 'barat' | 'vivah' | 'reception';
 
 const THEME_STYLES: Record<
   EventTheme,
@@ -39,6 +39,16 @@ const THEME_STYLES: Record<
     dividerClass: 'via-[#D4AF37]/65',
     fallbackGradient: 'from-[#5C1622] via-[#3D0D15] to-[#28060C]',
     icon: <Music className="w-4 h-4 text-[#E9C46A]" aria-hidden="true" />,
+  },
+  barat: {
+    cardClass: 'bg-gradient-to-b from-[#FFFDF9] via-[#FDF5E6] to-[#F7E5C8]',
+    borderClass: 'border-[#C59B38]/75',
+    titleClass: 'text-[#5C1622]',
+    taglineClass: 'text-[#8E6B23]',
+    timeClass: 'text-[#4A121C]',
+    dividerClass: 'via-[#C59B38]/65',
+    fallbackGradient: 'from-[#F5E09D] via-[#FAF0E6] to-[#E7C76B]',
+    icon: <Crown className="w-4 h-4 text-[#9E7B2F]" aria-hidden="true" />,
   },
   vivah: {
     cardClass: 'bg-gradient-to-b from-[#FFFDF9] via-[#FCF2EF] to-[#F7E1DB]',
@@ -108,7 +118,7 @@ const EventArtwork: React.FC<{
 export const EventsItinerary: React.FC = () => {
   return (
     <section id="celebrations" className="relative py-14 sm:py-24 px-4 sm:px-6 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 36, filter: 'blur(4px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -151,8 +161,14 @@ export const EventsItinerary: React.FC = () => {
                   </p>
                 </motion.div>
 
-                {/* Two Event Cards Grid with 3D Perspective Unfold & Golden Sheen Sweep */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-9 items-stretch [perspective:1100px]">
+                {/* Event Cards Grid with 3D Perspective Unfold & Golden Sheen Sweep */}
+                <div
+                  className={`grid grid-cols-1 gap-6 items-stretch [perspective:1100px] mx-auto ${
+                    day.events.length === 3
+                      ? 'md:grid-cols-2 lg:grid-cols-3 sm:gap-7 max-w-6xl md:[&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1 md:[&>*:last-child]:max-w-md md:[&>*:last-child]:w-full md:[&>*:last-child]:mx-auto lg:[&>*:last-child]:max-w-none'
+                      : 'md:grid-cols-2 sm:gap-9 max-w-5xl'
+                  }`}
+                >
                   {day.events.map((event, evIndex) => {
                     const styles = THEME_STYLES[event.theme];
                     const isDark = event.theme === 'sangeet' || event.theme === 'reception';

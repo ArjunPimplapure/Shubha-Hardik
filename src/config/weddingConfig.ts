@@ -11,8 +11,8 @@
  *    - The app preserves exact aspect ratio, original colours, and transparency.
  *
  * 2. BACKGROUND WEDDING SONG:
- *    - Replace `public/audio/wedding-music.wav` with your `.mp3` or `.wav` file,
- *      OR upload `public/audio/my-wedding-song.mp3` and update `WEDDING_MUSIC_SRC` below.
+ *    - Replace `public/wedding-music.wav` with your `.mp3` or `.wav` file,
+ *      OR update `WEDDING_MUSIC_SRC` below.
  *
  * 3. DECORATIVE EVENT / VENUE ARTWORK:
  *    - Update any path inside `DECORATIVE_IMAGES` below if you wish to substitute
@@ -32,23 +32,25 @@ export const WEDDING_MUSIC_SRC = '/wedding-music.wav';
 export const DECORATIVE_IMAGES = {
   haldi: '/src/assets/images/haldi_marigold_motif_1795042786712.jpg',
   sangeet: '/src/assets/images/sangeet_lantern_art_1795042802315.jpg',
+  barat: '/src/assets/images/barat_swagat_art_1795425650371.jpg',
   vivah: '/src/assets/images/vivah_mandap_motif_1795042787927.jpg',
   reception: '/src/assets/images/reception_chandelier_art_1795042803015.jpg',
   venue: '/src/assets/images/venue_palace_floral_1795042786560.jpg',
 } as const;
 
 export const WEDDING_DATA = {
-  religiousHeading: '॥ श्री कंकई नमः ॥',
+  religiousHeading: '॥ श्री कंकेश्वरी माता नमः ॥',
   invitationLead: 'With the divine blessings of our elders and the love of our families',
   invitationPrompt: 'We joyfully invite you to celebrate the wedding of',
   bride: {
     name: 'SHUBHA SHAH',
-    parents: 'D/o Shri Rajkumar Shah & Smt. Rakhi Shah',
+    parents: 'D/o Smt. Rakhi Rajkumar Shah (Ghelani)',
     grandparents: 'Grand Daughter of Late Smt. Jyotsana Anil Shah',
   },
   groom: {
     name: 'HARDIK GODA',
-    parents: 'S/o Shri Kishore Goda & Smt. Prerna Ben Goda',
+    parents: 'S/o Smt. Deepa Ketan Goda',
+    grandparents: 'Grandson of Smt. Prernaben Goda & Late Kishorebhai Goda',
   },
   // Midnight of the Wedding Date (26 December 2026) in Asia/Kolkata (+05:30)
   countdownTargetIso: '2026-12-26T00:00:00+05:30',
@@ -64,8 +66,8 @@ export const WEDDING_DATA = {
         {
           id: 'haldi',
           title: 'HALDI',
-          tagline: 'Carnival of Love / Hues Of Sunshine',
-          time: '10:30 AM',
+          tagline: 'Carnival of Love',
+          time: '12:30 AM',
           theme: 'haldi' as const,
           image: DECORATIVE_IMAGES.haldi,
           imageAlt: 'Traditional brass urli with yellow marigold garlands and turmeric hues',
@@ -88,10 +90,19 @@ export const WEDDING_DATA = {
       subtitle: 'A Sacred Beginning, A Timeless Celebration',
       events: [
         {
+          id: 'barat',
+          title: 'BARAT SWAGAT',
+          tagline: 'A Royal Welcome',
+          time: '11:00 AM',
+          theme: 'barat' as const,
+          image: DECORATIVE_IMAGES.barat,
+          imageAlt: 'Ornate Mughal palace gateway adorned with floral garlands, ceremonial drums, shehnai, and oil lamps',
+        },
+        {
           id: 'vivah',
           title: 'PHERE / SHUBH VIVAH',
           tagline: 'The Divine Knot',
-          time: '10:30 AM',
+          time: '12:39 PM',
           theme: 'vivah' as const,
           image: DECORATIVE_IMAGES.vivah,
           imageAlt: 'Sacred Indian wedding mandap adorned with red roses, jasmine, and brass kalash',
@@ -100,7 +111,7 @@ export const WEDDING_DATA = {
           id: 'reception',
           title: 'RECEPTION',
           tagline: 'Starlit Affair',
-          time: '12:30 PM',
+          time: '08:00 PM',
           theme: 'reception' as const,
           image: DECORATIVE_IMAGES.reception,
           imageAlt: 'Grand starlit palace banquet terrace illuminated by crystal chandeliers',

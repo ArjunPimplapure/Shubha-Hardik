@@ -525,8 +525,8 @@ export const HeartScratchCountdown: React.FC = () => {
                 </div>
               )}
 
-              <p className="mt-2 font-serif-royal italic text-sm sm:text-base text-[#5C1622]">
-                Shubha &amp; Hardik · {WEDDING_DATA.weddingDateShort}
+              <p className="mt-2.5 sm:mt-3 font-serif-royal text-xl sm:text-3xl font-bold text-[#5C1622] text-center tracking-wide leading-tight">
+                {WEDDING_DATA.weddingDateDisplay}
               </p>
             </div>
 
