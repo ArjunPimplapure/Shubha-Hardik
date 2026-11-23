@@ -45,7 +45,7 @@ export const WEDDING_DATA = {
   bride: {
     name: 'SHUBHA SHAH',
     parents: 'D/o Smt. Rakhi Rajkumar Shah (Ghelani)',
-    grandparents: 'Grand Daughter of Late Smt. Jyotsana Anil Shah',
+    grandparents: 'Grand Daughter of Late Smt. Jyotsana Anil Shah (Ghelani)',
   },
   groom: {
     name: 'HARDIK GODA',
@@ -126,21 +126,21 @@ export const WEDDING_DATA = {
     mapsUrl: 'https://maps.app.goo.gl/6nf8jr32N3ntoZBeA',
   },
   compliments: [
-    'Rakhi - Rajkumar Shah',
-    'Seema - Bhavesh Shah',
-    'Unnati - Vaibhav Shah',
-    'Munali - Bhavik Shah',
-    'Manan Shah',
+    'Rakhi Rajkumar Shah (Ghelani)',
+    'Seema Bhavesh Shah (Ghelani)',
+    'Unnati Vaibhav Shah (Ghelani)',
+    'Munali Bhavik Shah (Ghelani)',
+    'Manan Shah (Ghelani)',
   ],
   rsvpContacts: [
     {
-      name: 'Rajkumar Shah',
+      name: 'Rajkumar Shah (Ghelani)',
       displayPhone: '+91-98932 97224',
       telHref: 'tel:+919893297224',
       whatsappHref: 'https://wa.me/919893297224',
     },
     {
-      name: 'Vaibhav Shah',
+      name: 'Vaibhav Shah (Ghelani)',
       displayPhone: '+91-62629 22224',
       telHref: 'tel:+916262922224',
       whatsappHref: 'https://wa.me/916262922224',
@@ -150,6 +150,6 @@ export const WEDDING_DATA = {
     message: 'Your presence will make our celebration even more special.',
     couple: 'SHUBHA & HARDIK',
     regards: 'With Love & Warm Regards',
-    hostLine: 'Rakhi - Rajkumar Shah & Family',
+    hostLine: 'Rakhi Rajkumar Shah (Ghelani) & Family',
   },
 } as const;
