@@ -124,7 +124,7 @@ export const WEDDING_DATA = {
     heading: 'THE WEDDING VENUE',
     name: 'THE EXOTICA HOTEL',
     address: 'Mangliya, Indore, M.P.',
-    mapsUrl: 'https://maps.app.goo.gl/6nf8jr32N3ntoZBeA',
+    mapsUrl: 'https://maps.app.goo.gl/Eikr9L1yKvQB1x9K6',
   },
   compliments: [
     'Rakhi Rajkumar Shah (Ghelani)',
