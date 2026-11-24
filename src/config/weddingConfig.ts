@@ -40,6 +40,7 @@ export const DECORATIVE_IMAGES = {
 
 export const WEDDING_DATA = {
   religiousHeading: '॥ श्री कंकेश्वरी माता नमः ॥',
+  hashtag: '#HardikShubhkamnay',
   invitationLead: 'With the divine blessings of our elders and the love of our families',
   invitationPrompt: 'We joyfully invite you to celebrate the wedding of',
   bride: {

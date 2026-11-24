@@ -72,13 +72,16 @@ export const HeroInvitation: React.FC<HeroInvitationProps> = ({ curtainsOpened }
           {WEDDING_DATA.religiousHeading}
         </p>
 
-        {/* Official Wedding Monogram */}
+        {/* Official Wedding Monogram & Couple Hashtag */}
         <motion.div
           animate={curtainsOpened ? { scale: [0.96, 1.02, 1] } : undefined}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="my-4 sm:my-7 flex justify-center"
+          className="my-4 sm:my-7 flex flex-col items-center justify-center"
         >
           <WeddingLogo sizeClass="w-24 h-24 sm:w-44 sm:h-44" />
+          <p className="mt-2.5 sm:mt-3.5 font-serif-royal italic text-lg sm:text-2xl font-semibold tracking-[0.06em] text-[#7D5A18]">
+            {WEDDING_DATA.hashtag}
+          </p>
         </motion.div>
 
         {/* Blessings Lead Copy */}

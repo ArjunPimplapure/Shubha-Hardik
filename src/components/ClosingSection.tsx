@@ -71,9 +71,12 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ onReplayCurtains
           whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
           viewport={{ once: true, margin: '0px 0px -40px 0px' }}
           transition={{ duration: 0.9, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-          className="my-8"
+          className="my-8 flex flex-col items-center"
         >
           <WeddingLogo sizeClass="w-28 h-28 sm:w-36 sm:h-36" />
+          <p className="mt-3 font-serif-royal italic text-lg sm:text-2xl font-semibold tracking-[0.06em] text-[#7D5A18]">
+            {WEDDING_DATA.hashtag}
+          </p>
         </motion.div>
 
         <RoyalSectionDivider className="mb-7" />
