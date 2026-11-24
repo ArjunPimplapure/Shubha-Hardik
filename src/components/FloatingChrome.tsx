@@ -98,9 +98,9 @@ export const FloatingChrome: React.FC<FloatingChromeProps> = ({
       <div className="fixed bottom-3 sm:bottom-4 inset-x-0 z-40 flex justify-center px-2 sm:px-4 pointer-events-none">
         <nav
           aria-label="Wedding sections"
-          className="pointer-events-auto w-auto max-w-full rounded-full bg-[#FFFDF8]/92 backdrop-blur-md border border-[#D4AF37]/55 shadow-[0_10px_30px_rgba(59,11,20,0.14)] px-1.5 min-[375px]:px-2 sm:px-4 py-0.5"
+          className="pointer-events-auto w-full max-w-[420px] sm:w-auto sm:max-w-full overflow-hidden rounded-full bg-[#FFFDF8]/92 backdrop-blur-md border border-[#D4AF37]/55 shadow-[0_10px_30px_rgba(59,11,20,0.14)] px-2 sm:px-4 py-0.5"
         >
-          <ul className="flex flex-row flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 md:gap-2">
+          <ul className="flex flex-row flex-nowrap items-center justify-between sm:justify-center w-full sm:w-auto gap-0 sm:gap-1.5 md:gap-2">
             {NAV_ITEMS.map((item) => {
               const isActive = activeId === item.id;
               return (
@@ -108,7 +108,7 @@ export const FloatingChrome: React.FC<FloatingChromeProps> = ({
                   <button
                     type="button"
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative min-h-[42px] sm:min-h-[44px] px-1.5 min-[375px]:px-2 sm:px-3.5 md:px-4 inline-flex items-center justify-center text-center text-[9.5px] min-[375px]:text-[10.5px] sm:text-xs tracking-[0.04em] min-[375px]:tracking-[0.06em] sm:tracking-[0.12em] uppercase whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full ${
+                    className={`relative min-h-[42px] sm:min-h-[44px] px-1.5 min-[375px]:px-2 sm:px-3.5 md:px-4 inline-flex items-center justify-center text-center text-[clamp(9.5px,2.75vw,11.5px)] sm:text-xs tracking-[0.01em] sm:tracking-[0.12em] normal-case sm:uppercase whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full ${
                       isActive ? 'text-[#5C1622]' : 'text-[#6E4F46] hover:text-[#5C1622]'
                     }`}
                   >
@@ -126,7 +126,7 @@ export const FloatingChrome: React.FC<FloatingChromeProps> = ({
                         layoutId="navActiveUnderline"
                         aria-hidden="true"
                         transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                        className="absolute bottom-1.5 sm:bottom-2 left-2 right-2 sm:left-3 sm:right-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#C59B38] to-transparent"
+                        className="absolute bottom-1.5 sm:bottom-2 left-1.5 right-1.5 sm:left-3 sm:right-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#C59B38] to-transparent"
                       />
                     )}
                   </button>
