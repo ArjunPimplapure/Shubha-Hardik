@@ -54,15 +54,17 @@ export default function App() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.volume = 0.55;
-    if (audio.readyState === 0) {
+    if (audio.error) {
       audio.load();
     }
     const playPromise = audio.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {
-        // Browser autoplay blocked; guest can start playback manually via top-right control
-        setIsPlaying(false);
-      });
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise
+        .then(() => setIsPlaying(true))
+        .catch(() => {
+          // Browser autoplay blocked; guest can start playback manually via top-right control
+          setIsPlaying(false);
+        });
     }
   };
 
@@ -72,10 +74,15 @@ export default function App() {
 
     if (audio.paused) {
       audio.volume = 0.55;
-      if (audio.readyState === 0) {
+      if (audio.error) {
         audio.load();
       }
-      audio.play().catch(() => setIsPlaying(false));
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => setIsPlaying(false));
+      }
     } else {
       audio.pause();
     }
@@ -92,7 +99,7 @@ export default function App() {
     <div className="relative min-h-screen ivory-canvas-bg text-[#2B1B18] overflow-x-hidden">
       {/*
         Replaceable Background Wedding Audio Player.
-        Update WEDDING_MUSIC_SRC in src/config/weddingConfig.ts or replace public/wedding-music.wav
+        Update WEDDING_MUSIC_SRC in src/config/weddingConfig.ts or replace public/wedding_music.wav
       */}
       <audio ref={audioRef} src={WEDDING_MUSIC_SRC} loop preload="auto" />
 
