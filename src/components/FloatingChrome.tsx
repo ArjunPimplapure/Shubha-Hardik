@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { Music, Pause, Play, RotateCcw } from 'lucide-react';
 
 interface FloatingChromeProps {
@@ -87,42 +88,54 @@ export const FloatingChrome: React.FC<FloatingChromeProps> = ({
             <Play className="w-3.5 h-3.5 text-[#8E6B23] shrink-0" aria-hidden="true" />
           )}
           <span className="sr-only">{isPlaying ? 'Playing' : 'Paused'}</span>
-          {isPlaying && <Pause className="w-3 h-3 text-[#7D5A18] hidden sm:inline shrink-0" aria-hidden="true" />}
+          {isPlaying && (
+            <Pause className="w-3 h-3 text-[#7D5A18] hidden sm:inline shrink-0" aria-hidden="true" />
+          )}
         </button>
       </div>
 
-      {/* Minimal Floating Editorial Navigation Dock */}
-      <nav
-        aria-label="Wedding sections"
-        className="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-16px)] rounded-full bg-[#FFFDF8]/92 backdrop-blur-md border border-[#D4AF37]/55 shadow-[0_10px_30px_rgba(59,11,20,0.14)] px-2 sm:px-4"
-      >
-        <ul className="flex items-center justify-center gap-0.5 sm:gap-2">
-          {NAV_ITEMS.map((item) => {
-            const isActive = activeId === item.id;
-            return (
-              <li key={item.id}>
-                <button
-                  type="button"
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative min-h-[44px] px-2 sm:px-3.5 flex items-center justify-center text-[11px] sm:text-xs tracking-[0.06em] sm:tracking-[0.12em] uppercase whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full ${
-                    isActive
-                      ? 'text-[#5C1622] font-semibold'
-                      : 'text-[#6E4F46] hover:text-[#5C1622] font-medium'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {isActive && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute bottom-2 left-2.5 right-2.5 h-[1.5px] bg-gradient-to-r from-transparent via-[#C59B38] to-transparent"
-                    />
-                  )}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      {/* Centered Floating Editorial Navigation Dock across all screen sizes */}
+      <div className="fixed bottom-3 sm:bottom-4 inset-x-0 z-40 flex justify-center px-2 sm:px-4 pointer-events-none">
+        <nav
+          aria-label="Wedding sections"
+          className="pointer-events-auto w-auto max-w-full rounded-full bg-[#FFFDF8]/92 backdrop-blur-md border border-[#D4AF37]/55 shadow-[0_10px_30px_rgba(59,11,20,0.14)] px-1.5 min-[375px]:px-2 sm:px-4 py-0.5"
+        >
+          <ul className="flex flex-row flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 md:gap-2">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeId === item.id;
+              return (
+                <li key={item.id} className="shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection(item.id)}
+                    className={`relative min-h-[42px] sm:min-h-[44px] px-1.5 min-[375px]:px-2 sm:px-3.5 md:px-4 inline-flex items-center justify-center text-center text-[9.5px] min-[375px]:text-[10.5px] sm:text-xs tracking-[0.04em] min-[375px]:tracking-[0.06em] sm:tracking-[0.12em] uppercase whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full ${
+                      isActive ? 'text-[#5C1622]' : 'text-[#6E4F46] hover:text-[#5C1622]'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="navActiveGlow"
+                        aria-hidden="true"
+                        transition={{ type: 'spring', stiffness: 360, damping: 32 }}
+                        className="absolute inset-x-0.5 inset-y-1.5 rounded-full bg-[#D4AF37]/12 -z-10"
+                      />
+                    )}
+                    <span className="leading-none">{item.label}</span>
+                    {isActive && (
+                      <motion.span
+                        layoutId="navActiveUnderline"
+                        aria-hidden="true"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                        className="absolute bottom-1.5 sm:bottom-2 left-2 right-2 sm:left-3 sm:right-3 h-[1.5px] bg-gradient-to-r from-transparent via-[#C59B38] to-transparent"
+                      />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
     </>
   );
 };
