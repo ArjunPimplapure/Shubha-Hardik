@@ -68,7 +68,7 @@ export const WEDDING_DATA = {
           id: 'haldi',
           title: 'HALDI',
           tagline: 'Carnival of Love',
-          time: '12:30 AM',
+          time: '12:30 PM',
           theme: 'haldi' as const,
           image: DECORATIVE_IMAGES.haldi,
           imageAlt: 'Traditional brass urli with yellow marigold garlands and turmeric hues',
